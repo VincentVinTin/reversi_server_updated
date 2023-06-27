@@ -3,17 +3,19 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:8699",
-      "sslPort": 44379
+      "applicationUrl": "http://localhost:60667",
+      "sslPort": 44344
     }
   },
   "profiles": {
     "ReversiMvcApp": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7281;http://localhost:5179",
+      "applicationUrl": "https://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SQLSource": "127.0.0.1,1433",
+        "SQLPass": "U4zgsHysuJ8"
       },
       "dotnetRunMessages": true
     },
@@ -21,8 +23,16 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SQLSource": "127.0.0.1,1433",
+        "SQLPass": "U4zgsHysuJ8"
       }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/",
+      "environmentVariables": {}
     }
   }
 }

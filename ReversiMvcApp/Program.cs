@@ -1,17 +1,45 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ReversiMvcApp.Controllers;
 using ReversiMvcApp.Data;
+
+static string GetFilledConnectionString(string connectionString)
+{
+    connectionString = connectionString.Replace("<SQLSource>", "127.0.0.1,1433");
+    connectionString = connectionString.Replace("<SQLPass>", "U4zgsHysuJ8");
+
+    return connectionString;
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionStringDefault = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
+    options.UseSqlServer(GetFilledConnectionString(connectionStringDefault)));
+
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+    options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
+
+var dbContextUsers = builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
+dbContextUsers.Database.Migrate();
+
+var connectionStringReversi = builder.Configuration.GetConnectionString("ReversiConnection");
+builder.Services.AddDbContext<ReversiDbContext>(options =>
+    options.UseSqlServer(GetFilledConnectionString(connectionStringReversi)));
+
+var dbContextReversi = builder.Services.BuildServiceProvider().GetRequiredService<ReversiDbContext>();
+dbContextReversi.Database.Migrate();
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddTransient<SpelerController>();
+builder.Services.AddTransient<ApiController>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -19,7 +47,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
 }
 else
 {

@@ -8,9 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Remove="Migrations\" />
+    <None Remove="Views\Spel\" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="wwwroot\css\style.min.css" />
+    <None Include="wwwroot\js\app.js" />
+    <None Include="wwwroot\js\vendor.js" />
+    <None Include="wwwroot\js\templates.js" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.18" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.18" />
@@ -19,4 +25,19 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.18" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="Views\Spel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReversiRestApi\ReversiRestApi.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\css\style.min.css" />
+    <Content Remove="wwwroot\js\app.js" />
+    <Content Remove="wwwroot\js\vendor.js" />
+    <Content Remove="wwwroot\js\templates.js" />
+  </ItemGroup>
 </Project>

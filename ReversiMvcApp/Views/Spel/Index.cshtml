@@ -1,0 +1,44 @@
+﻿@using ReversiMvcApp.Controllers
+@model IEnumerable<ReversiRestApi.Models.SpelTbvJson>
+@inject SpelerController SpelerController
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                Eigenaar
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Omschrijving)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Speler1Token)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Omschrijving)
+                </td>
+                <td>
+                    <a asp-action="Join" asp-route-spelToken="@item.Token">Join</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
