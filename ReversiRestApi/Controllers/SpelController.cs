@@ -17,17 +17,17 @@ namespace ReversiRestApi.Controllers
 
         // GET api/spel
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SpelTbvJson>>> GetSpellen()
+        public ActionResult<IEnumerable<SpelTbvJson>> GetSpellen()
         {
-            var spellen = await iRepository.GetSpellen();
+            var spellen = iRepository.GetSpellen();
             return spellen.Select(s => new SpelTbvJson(s)).ToList();
         }
 
         // GET api/spel/wachtend
         [HttpGet("wachtend")]
-        public async Task<ActionResult<IEnumerable<SpelTbvJson>>> GetSpellenMetWachtendeSpelerAsync()
+        public ActionResult<IEnumerable<SpelTbvJson>> GetSpellenMetWachtendeSpelerAsync()
         {
-            var spellen = await iRepository.GetSpellen();
+            var spellen = iRepository.GetSpellen();
             return spellen.Where(s => s.Speler2Token == null).Select(s => new SpelTbvJson(s)).ToList();
         }
 

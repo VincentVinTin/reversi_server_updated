@@ -8,10 +8,10 @@ namespace ReversiRestApi.Models
     public class Spel : ISpel
     {
         public int ID { get; set; }
-        public string Omschrijving { get; set; }
-        public string Token { get; set; }
-        public string Speler1Token { get; set; }
-        public string Speler2Token { get; set; }
+        public string? Omschrijving { get; set; }
+        public string? Token { get; set; }
+        public string? Speler1Token { get; set; }
+        public string? Speler2Token { get; set; }
         public Kleur[,] Bord { get; set; }
         public Kleur AandeBeurt { get; set; }
         public Kleur Winnaar { get; set; }
@@ -35,7 +35,7 @@ namespace ReversiRestApi.Models
             Token = spel.Token;
             Speler1Token = spel.Speler1Token;
             Speler2Token = spel.Speler2Token;
-            Bord = JsonConvert.DeserializeObject<Kleur[,]>(spel.Bord);
+            Bord = JsonConvert.DeserializeObject<Kleur[,]>(spel.Bord)!;
             AandeBeurt = spel.AandeBeurt;
             Winnaar = spel.Winnaar;
         }

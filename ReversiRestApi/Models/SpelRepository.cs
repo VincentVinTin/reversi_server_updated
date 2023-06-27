@@ -27,9 +27,9 @@ namespace ReversiRestApi.Models
             await Task.Run(() => Spellen.Add(spel));
         }
 
-        public async Task<List<Spel>> GetSpellen()
+        public List<Spel> GetSpellen()
         {
-            return await Task.Run(() => Spellen);
+            return Spellen;
         }
 
         public async Task<Spel?> GetSpel(string spelToken)

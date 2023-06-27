@@ -16,7 +16,7 @@ namespace ReversiRestApi.Migrations
                     Token = table.Column<string>(nullable: true),
                     Speler1Token = table.Column<string>(nullable: true),
                     Speler2Token = table.Column<string>(nullable: true),
-                    Bord = table.Column<string>(nullable: true),
+                    Bord = table.Column<string>(nullable: false),
                     AandeBeurt = table.Column<int>(nullable: false),
                     Winnaar = table.Column<int>(nullable: false)
                 },

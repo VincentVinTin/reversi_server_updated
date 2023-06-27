@@ -45,9 +45,9 @@ namespace ReversiRestApi.DAL
             }
         }
 
-        public async Task<List<Spel>> GetSpellen()
+        public List<Spel> GetSpellen()
         {
-            return await _spellen.Select(s => new Spel(s)).ToListAsync();
+            return _spellen.Select(s => new Spel(s)).ToList();
         }
 
         public async Task UpdateSpel(Spel spel)
