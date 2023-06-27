@@ -6,8 +6,8 @@ using ReversiMvcApp.Data;
 
 static string GetFilledConnectionString(string connectionString)
 {
-    connectionString = connectionString.Replace("<SQLSource>", "127.0.0.1,1433");
-    connectionString = connectionString.Replace("<SQLPass>", "U4zgsHysuJ8");
+    connectionString = connectionString.Replace("<SQLSource>", Environment.GetEnvironmentVariable("SQLSource"));
+    connectionString = connectionString.Replace("<SQLPass>", Environment.GetEnvironmentVariable("SQLPass"));
 
     return connectionString;
 }
