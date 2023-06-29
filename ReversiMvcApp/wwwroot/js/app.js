@@ -1,6 +1,6 @@
 const Game = (function () {
     let configMap = {
-        apiUrl: "https://localhost:5001/api",
+        apiUrl: "http://localhost:5001/api",
         bordId: "bord",
         chartId: "chart",
         environment: "production",

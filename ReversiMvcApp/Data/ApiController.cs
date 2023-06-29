@@ -4,7 +4,7 @@ namespace ReversiMvcApp.Data
 {
     public class ApiController : Controller
     {
-        private string requestUri = "https://localhost:5001";
+        private string requestUri = "http://localhost:5001/";
         private string apiUri = "api/";
         private HttpClient client;
 
