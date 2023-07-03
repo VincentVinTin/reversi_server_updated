@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+  reversimvcapp:
+    image: ${DOCKER_REGISTRY-}reversimvcapp
+    build:
+      context: .
+      dockerfile: ReversiMvcApp/Dockerfile
+    depends_on:
+      - reversirestapi
+    ports:
+      - "5000:80"
+    environment:
+      SQLSource: "mssql"
+      SQLPass: "U4zgsHysuJ8"
+
+  reversirestapi:
+    image: ${DOCKER_REGISTRY-}reversirestapi
+    build:
+      context: .
+      dockerfile: ReversiRestApi/Dockerfile
+    depends_on:
+      - mssql
+    ports:
+      - "5001:80"
+    environment:
+      SQLSource: "mssql"
+      SQLPass: "U4zgsHysuJ8"
+
+  mssql:
+    container_name: mssql
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    environment:
+      SA_PASSWORD: "U4zgsHysuJ8"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"

@@ -25,6 +25,16 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
 builder.Services.Configure<IdentityOptions>(options =>
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredLength = 12;
+    options.Password.RequiredUniqueChars = 1;
+});
+
 var dbContextUsers = builder.Services.BuildServiceProvider().GetRequiredService<ApplicationDbContext>();
 dbContextUsers.Database.Migrate();
 
